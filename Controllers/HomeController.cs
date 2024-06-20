@@ -77,5 +77,6 @@ namespace AzureAppService_Blink.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        
     }
 }
