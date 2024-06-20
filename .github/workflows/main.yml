@@ -1,0 +1,22 @@
+name: Build Linux Container Image and Push to ACR
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: /
+    steps:
+    - uses: actions/checkout@v2
+    - uses: azure/docker-login@v1
+      with:
+        login-server: blinkappregistry.azurecr.io
+        username: blinkappregistry
+        password: p6zAsaME804kpAn//Vo/ipzWmI/iBF0FK/DFVpy2lH+ACRBKMzYV
+    - run: |
+        docker build . -t blinkappregistry.azurecr.io/blinkappregistry:${{ github.sha }}
+        docker push blinkappregistry.azurecr.io/blinkappregistry:${{ github.sha }}
